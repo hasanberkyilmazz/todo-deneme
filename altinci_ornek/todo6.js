@@ -13,6 +13,7 @@ const addTodo = () => {
     }
     if (addBtn.value === "Edit") {
         editTodo.target.previousElementSibling.innerHTML = inputText;
+        editLocalTodos(inputText);
         addBtn.value = "Add";
         inputBox.value = "";
     }
@@ -126,6 +127,13 @@ const deleteLocal = () =>{
     // Array function : slice / splice 
     console.log(todoIndex);
 
+}
+
+const editLocalTodos = (todo) =>{
+    let todos = JSON.parse(localStorage.getItem("todos"));
+    let todoIndex = todos.indexOf(todo);
+    todos[todoIndex] = inputBox.value;
+    localStorage.setItem("todos", JSON.stringify(todos));
 }
 document.addEventListener(`DOMContentloaded` , getLocalTodos);
 addBtn.addEventListener(`click`, addTodo);
